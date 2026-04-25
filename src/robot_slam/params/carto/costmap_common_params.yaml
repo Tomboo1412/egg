@@ -1,0 +1,23 @@
+# costmap_common_params.yaml
+# 针对 3.6m×3.6m 小场地 + 随机挡板(40×30cm) 调参说明:
+#
+# obstacle_range: 1.5m  — 小场地对角线~5m，1.5m 足以探测到最近的挡板
+# raytrace_range: 2.0m  — 比 obstacle_range 略大，确保能清除已消失的障碍
+# footprint:      机器人实际轮廓 (单位m)，请根据实机尺寸修改；
+#                 当前按 30cm×30cm 方形车体设置
+# inflation_radius: 0.20m — 比挡板半短边(0.15m)略大，保证绕行余量但不过度占用小场地
+# cost_scaling_factor: 3.5 — 衰减较快，使全局路径不紧贴障碍
+
+obstacle_range: 1.5
+raytrace_range: 2.0
+
+# 机器人轮廓 (x 前后 ±0.15m, y 左右 ±0.15m)，根据实机调整
+footprint: [[-0.15, -0.15], [-0.15, 0.15], [0.15, 0.15], [0.15, -0.15]]
+# robot_radius: 0.17  # 若为圆形底盘，取消注释并注释掉 footprint
+
+inflation_radius: 0.20
+cost_scaling_factor: 3.5
+
+map_type: costmap
+observation_sources: scan
+scan: {sensor_frame: laser_link, data_type: LaserScan, topic: scan_filtered, marking: true, clearing: true}

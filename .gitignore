@@ -1,0 +1,26 @@
+# ROS catkin build & devel artifacts
+build/
+devel/
+install/
+logs/
+
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__/
+
+# TTS / audio output artifacts
+output.mp3
+
+# Temporary camera images captured at runtime
+src/abot_vlm/temp/
+src/abot_vlm/temp2/
+
+# Editor / OS noise
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+.env

@@ -1,0 +1,20 @@
+# local_costmap_params.yaml
+# 针对 3.6m×3.6m 小场地调参说明:
+#
+# rolling_window: 3.0×3.0m — 略小于全场，DWA 在局部窗口内规划，覆盖整个场地宽度
+# resolution: 0.02m — 精细分辨率 (2cm/格)，适合随机挡板精确绕行
+# update_frequency / publish_frequency: 10Hz — 足够响应速度
+
+local_costmap:
+   global_frame: odom
+   robot_base_frame: base_link
+
+   update_frequency: 10.0
+   publish_frequency: 10.0
+   transform_tolerance: 0.5
+
+   static_map: false
+   rolling_window: true
+   width: 3.0
+   height: 3.0
+   resolution: 0.02

@@ -1,0 +1,28 @@
+<launch>
+  <!-- 比赛场地导航总启动文件
+       依次启动: 地图服务 -> Cartographer定位 -> move_base -> 地面赛主控程序
+
+       注意: use_sim_time 默认 true（与 zoo_2Dlidar_localication.launch 保持一致）。
+             真实机器人部署时若不使用 rosbag/仿真时钟，请改为 false:
+               roslaunch robot_slam navigation.launch use_sim_time:=false
+  -->
+
+  <arg name="use_sim_time" default="true" />
+  <param name="use_sim_time" value="$(arg use_sim_time)" />
+
+  <!-- 默认使用比赛地图 (先建图再替换 craic_ground.pgm/yaml) -->
+  <arg name="map_name" default="craic_ground.yaml" />
+
+  <!-- 静态地图 -->
+  <node name="map_server" pkg="map_server" type="map_server"
+        args="$(find robot_slam)/maps/$(arg map_name)"/>
+
+  <!-- Cartographer 纯定位 (提供 map->odom TF) -->
+  <include file="$(find robot_slam)/launch/zoo_2Dlidar_localication.launch"/>
+
+  <!-- move_base 导航栈 -->
+  <include file="$(find robot_slam)/launch/include/move_base.launch.xml"/>
+
+  <!-- 地面赛主控程序 (状态机: 等待唤醒->识别->任务->终点) -->
+  <include file="$(find robot_slam)/launch/multi_goal.launch"/>
+</launch>

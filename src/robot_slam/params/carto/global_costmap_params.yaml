@@ -1,0 +1,16 @@
+# global_costmap_params.yaml
+# 针对 3.6m×3.6m 小场地调参说明:
+#
+# resolution: 0.05m — 5cm/格，比原来 0.1m 细，更精确规划绕挡板路径
+# update_frequency: 2.0Hz — 全局代价地图更新无需太频繁，节省 CPU
+# publish_frequency: 2.0Hz — 同上
+
+global_costmap:
+   global_frame: map
+   robot_base_frame: base_link
+
+   update_frequency: 2.0
+   publish_frequency: 2.0
+   resolution: 0.05
+
+   static_map: true

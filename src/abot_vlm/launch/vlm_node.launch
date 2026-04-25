@@ -1,0 +1,5 @@
+<launch>
+    <!-- 任务信息识别服务 (task_identify) -->
+    <!-- calculate.py 和 end_serve.py 在地面赛中不使用，不在此启动 -->
+    <node name="identify_node" pkg="abot_vlm" type="identify_service.py" output="screen"/>
+</launch>

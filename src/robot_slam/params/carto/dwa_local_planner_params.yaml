@@ -1,0 +1,65 @@
+# dwa_local_planner_params.yaml
+# 针对 3.6m×3.6m 小场地 + 随机挡板调参说明:
+#
+# max_vel_x: 0.30m/s   — 比规则上限 1m/s 保守，防止撞围栏(撞围栏直接结束)
+# min_vel_x: -0.10m/s  — 允许少量后退以脱困，不宜过大
+# max_vel_trans: 0.30   — 与 max_vel_x 一致
+# min_vel_trans: 0.08   — 足以让机器人在狭小空间缓慢移动
+# max_vel_theta: 1.5    — 原地转向不宜过快，防止惯性过冲
+# min_vel_theta: 0.5    — 足够完成转向
+# acc_lim_x: 1.5        — 较原来 3.0 更平缓，减少起步冲击
+# acc_lim_theta: 1.5    — 同上
+# acc_lim_y: 0.0        — 差速机器人无横移
+# xy_goal_tolerance: 0.10m  — 比原来 0.15m 更严格，到点停稳
+# yaw_goal_tolerance: 0.10  — 约 5.7°，实用精度
+# sim_time: 2.5s         — 适当增加预测时域，绕挡板更流畅
+# holonomic_robot: false — 差速机器人(非全向轮)
+
+DWAPlannerROS:
+
+# 速度限制 (小场地建议保守)
+  max_vel_x: 0.30
+  min_vel_x: -0.10
+
+  max_vel_y: 0.0
+  min_vel_y: 0.0
+
+  max_vel_trans: 0.30
+  min_vel_trans: 0.08
+
+  max_vel_theta: 1.5
+  min_vel_theta: 0.5
+
+  acc_lim_x: 1.5
+  acc_lim_theta: 1.5
+  acc_lim_y: 0.0
+
+  xy_goal_tolerance: 0.10
+  yaw_goal_tolerance: 0.10
+  latch_xy_goal_tolerance: false
+
+# 轨迹仿真
+  sim_time: 2.5
+  vx_samples: 10
+  vy_samples: 0
+  vth_samples: 20
+  controller_frequency: 10.0
+
+# 轨迹评分
+  path_distance_bias: 32.0
+  goal_distance_bias: 24.0
+  occdist_scale: 0.05
+  forward_point_distance: 0.325
+  stop_time_buffer: 0.2
+  scaling_speed: 0.25
+  max_scaling_factor: 0.2
+
+# 振荡抑制
+  oscillation_reset_dist: 0.05
+
+# 调试
+  publish_traj_pc: true
+  publish_cost_grid_pc: true
+
+# 差速机器人
+  holonomic_robot: false

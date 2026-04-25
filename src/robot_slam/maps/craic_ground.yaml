@@ -1,0 +1,17 @@
+# 比赛场地地图配置文件
+# 场地规格: 3.6m × 3.6m，围栏高 30cm，随机挡板 40×30cm
+#
+# !!! 注意: 本文件是占位文件，必须在正式比赛前用 slam 建图替换 craic_ground.pgm !!!
+# 建图步骤:
+#   1. roslaunch robot_slam gmapping.launch  (或 cartographer)
+#   2. 驱动机器人绕场一圈建图
+#   3. rosrun map_server map_saver -f $(rospack find robot_slam)/maps/craic_ground
+#   4. 用生成的 craic_ground.pgm / craic_ground.yaml 替换本占位文件
+#
+image: craic_ground.pgm
+resolution: 0.05
+# 地图原点 (左下角) 对应 ROS 坐标 (0, 0, 0)
+origin: [0.0, 0.0, 0.0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
